@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import {Link} from 'react-router-dom';
 import { ReactComponent as Logo } from '../../assets/images/shopping.svg';
 import { auth } from '../../config/firebase/firebase.util';
+import CartIconComponent from '../cart-icon/cartIcon.component';
+import CartDropdownComponent from '../cart-dropdown/cart-dropdown.component';
 
 const NavbarComponent = ({currentUser}) =>{
     return (
@@ -20,7 +22,9 @@ const NavbarComponent = ({currentUser}) =>{
                     :
                     <Link className="option" to="/login">LOGIN</Link>
                 }
+                <CartIconComponent />
             </div>
+            <CartDropdownComponent />
         </div>
     );
 }

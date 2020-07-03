@@ -7,6 +7,7 @@ import LoginRegistrationComponent from './pages/login-registration/login-registr
 import { auth, createUserProfileDocument } from './config/firebase/firebase.util';
 import { connect } from 'react-redux';
 import setCurrentUser from './config/redux/actions/users.actions';
+import ItemComponent from './components/shop-items/item.component';
 
 class App extends Component {
   userSubscription = null;
@@ -40,8 +41,15 @@ class App extends Component {
         <NavbarComponent />
         <div className="wrapper">
           <Switch>
-            <Route exact path='/'><HomeComponent /></Route>
-            <Route exact path='/shop'><ShopComponent /></Route>
+            <Route exact path='/'>
+              <HomeComponent />
+            </Route>
+            <Route exact path='/shop'>
+              <ShopComponent />
+            </Route>
+            <Route exact path='/shop/:itemId'>
+              <ItemComponent />
+            </Route>
             <Route exact path='/login' render={
               () =>
                 this.props.currentUser ? (<Redirect to="/" />) : (<LoginRegistrationComponent />)              
