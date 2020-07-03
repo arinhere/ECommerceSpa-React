@@ -1,19 +1,32 @@
 import React from 'react';
-import logo  from '../../assets/images/shopping.png';
-import {Button} from 'react-bootstrap';
-import  history from '../../history';
+import { connect } from 'react-redux';
+import {Link} from 'react-router-dom';
+import { ReactComponent as Logo } from '../../assets/images/shopping.svg';
+import { auth } from '../../config/firebase/firebase.util';
 
-export const NavbarComponent = () =>{
+const NavbarComponent = ({currentUser}) =>{
     return (
-        <div className="navbar">
-            <div className="nav-logo">
-                <img src={logo} alt="logo" />
-            </div>
-            <div className="nav-align">
-                <Button variant="outline-primary" onClick={()=> history.push('/')}>Home</Button>&nbsp;
-                {/* <Link variant="outline-primary" to="/shop">Shop</Link> */}
-                <Button variant="outline-primary" onClick={()=> history.push('/shop')} >Shop</Button>
+        <div className="header">
+            <Link className="logo-container" to="/">
+                {/* <img src={logo} alt="logo" /> */}
+                <Logo />
+            </Link>
+            <div className="options">
+                <Link className="option" to="/">HOME</Link>
+                <Link className="option" to="/shop">SHOP</Link>                
+                {
+                    currentUser ? 
+                    <div className="option" onClick={() => auth.signOut()}> LOG OUT </div>
+                    :
+                    <Link className="option" to="/login">LOGIN</Link>
+                }
             </div>
         </div>
     );
 }
+
+const mapStateToProps = state => ({
+    currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(NavbarComponent);

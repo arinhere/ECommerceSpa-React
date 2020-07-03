@@ -1,13 +1,15 @@
 import React from 'react';
 import '../../pages/styles/pages.style.scss';
 
-
 export const ShopItemComponent = props => (
-    <div className="text-style">        
-        <div>
+    <div>
+        <div className="text-style">        
             <img src={`${props.item.imageUrl}`} alt={props.item.name} 
                 style={{width: '200px', height: '180px'}} />
         </div>
-        <div>{props.item.name}</div>
+        <div className="float-container">
+            <div className="item_title">{props.item.name}</div>
+            <div className="item_price">${props.item.price}</div>
+        </div>
     </div>
 );
