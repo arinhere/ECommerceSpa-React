@@ -1,7 +1,7 @@
 import { actionTypes } from '../actionTypes';
 
 const checkToggle = {
-    isClicked: false
+    isCartIconClicked: false
 };
 
 const CartReducer = ( state = checkToggle, action ) => {
@@ -9,7 +9,7 @@ const CartReducer = ( state = checkToggle, action ) => {
         case actionTypes.SET_CART_DROPDOWN:
             return {
                 ...state,
-                isClicked: !state.isClicked
+                isCartIconClicked: !state.isCartIconClicked
             }
         default:
             return checkToggle;

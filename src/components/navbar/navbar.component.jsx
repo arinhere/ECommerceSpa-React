@@ -6,7 +6,8 @@ import { auth } from '../../config/firebase/firebase.util';
 import CartIconComponent from '../cart-icon/cartIcon.component';
 import CartDropdownComponent from '../cart-dropdown/cart-dropdown.component';
 
-const NavbarComponent = ({currentUser}) =>{
+const NavbarComponent = ({currentUser, isCartIconClicked}) =>{
+    console.log('isCartIconClicked: ', isCartIconClicked);
     return (
         <div className="header">
             <Link className="logo-container" to="/">
@@ -24,13 +25,17 @@ const NavbarComponent = ({currentUser}) =>{
                 }
                 <CartIconComponent />
             </div>
-            <CartDropdownComponent />
+            {
+                isCartIconClicked ? <CartDropdownComponent  /> : null
+                
+            }
         </div>
     );
 }
 
-const mapStateToProps = state => ({
-    currentUser: state.user.currentUser
+const mapStateToProps = ({ user: {currentUser}, cart: { isCartIconClicked } }) => ({
+    currentUser,
+    isCartIconClicked
 });
 
 export default connect(mapStateToProps)(NavbarComponent);
